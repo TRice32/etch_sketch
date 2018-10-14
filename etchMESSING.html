@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<head>
+	<link rel="stylesheet" type = "text/css" href = "styles.css">
+</head>
+	<body>
+		<button onclick = "resetGrid()" id = "reset">RESET GAME</button>
+		<div id = "container"></div>
+		
+		<script type="text/javascript">
+		
+		var box;
+		var newBox;
+
+		function createGrid(x) { // creates a grid of divs, appends them to container
+			for(i = 0; i < (x * x); i++) {
+					
+					box = document.createElement("div");
+					box.style.width = "35px";
+					box.style.height = "35px";
+					box.style.backgroundColor = "green";
+					newBox = document.getElementById("box").classList.add('newBox');
+					document.getElementById("container").appendChild(box);
+					
+					changeBackground(); //calls function to enable event listener
+					//console.log(box);
+
+					for(var j = 0; j < newBox.length; j++) {
+					newBox[j].addEventListener("mouseover", changeBackground);
+					}
+
+				}
+		}
+
+
+		function changeBackground() { 
+			
+			newBox.style.backgroundColor = "orange";
+		};
+
+		
+
+		
+		
+		function resetGrid() { 
+			box.style.backgroundColor = "green";
+			console.log("Change");
+		};
+					
+		//document.getElementById("box")
+		
+
+
+
+		
+
+		createGrid(16); // creates grid of x * x;
+		
+
+		/*function resetGrid() { // when "reset" button clicked, should remove event listener "addColour" and 						  revert to original background colour
+					document.getElementById("reset").removeEventListener("click", changeBackground);
+					console.log("reset");
+		};*/
+
+		</script>
+		
+		
+	</body>

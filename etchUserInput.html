@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<head>
+	<link rel="stylesheet" type = "text/css" href = "styles.css">
+</head>
+	<body>
+		<button onclick = "resetGrid()" id = "reset">Reset Game</button>
+		<button onclick = "randomColour()" id = "random">Random Colours</button>
+		<button onclick = "blackWhite()" id = "blackWhite">Black Ink, Baby</button>
+		<div id = "container"></div>
+		
+		<script type="text/javascript">
+		
+		var user;
+		var boxColour;
+		var backgroundColor;
+		var box;
+		var random = false;
+		var container = document.getElementById("container");
+		var blackWhiteBtn = document.getElementById("blackWhite");
+		var reset = document.getElementById("reset");
+		var random = document.getElementById("random");
+
+		blackWhiteBtn.addEventListener("click", blackWhite);
+		reset.addEventListener("click", changeColour);
+		random.addEventListener("click", randomColour);
+
+
+		function createGrid(x) { // creates a grid of divs, appends them to container
+			for(i = 0; i < (x * x); i++) {
+					
+				box = document.createElement("div");
+				box.addEventListener("mouseover", realColour);
+				box.setAttribute("id", "box1");
+				box.style.width = 600/x + "px";
+				box.style.height = 600/x + "px";
+				box.style.backgroundColor = "green";
+				document.getElementById("container").appendChild(box);
+				changeColour();
+				}
+		}
+
+		function changeColour() {
+			boxColour = "orange";
+			backgroundColor = "green";
+			random = false;
+		}
+
+		
+		function blackWhite() {
+			boxColour = "black";
+			backgroundColor = "white";
+			random = false;
+		}
+		
+
+		function realColour() {
+			this.style.backgroundColor = backgroundColor;
+			if(random === true) {
+				var randColours = ["#81cce8", "#a681e8", "#89e5c3", "#e28b68", "#cddd66"];
+				var rand = Math.floor(Math.random()*randColours.length);
+				//colourBox.style.backgroundColor = colours[rand];
+				boxColour = randColours[rand];
+				this.style.backgroundColor = boxColour;
+			} else {
+				this.style.backgroundColor = boxColour;
+			}
+		}
+		
+		
+		function randomColour() {
+			random = true;
+			
+		}
+
+			/*var colours = ["#81cce8", "#a681e8", "#89e5c3", "#e28b68", "#cddd66"];
+			var colourBox = document.getElementById("random");
+			var rand = Math.floor(Math.random()*colours.length);
+			colourBox.style.backgroundColor = colours[rand];*/// Changes randomColour backgroundColor...
+		
+
+		
+		
+		function resetGrid() { 
+			container.innerHTML = '';
+			//container.style.backgroundColor = backgroundColor;
+			user = prompt("How many squares per side, maximum 60: ");
+
+			if(user > 60 || user === "") {
+				resetGrid();				
+			} else if(user === null) {
+				resetGrid();////////Make this go back to drawing without resetting////////
+			}
+			createGrid(user);
+		};
+		
+
+
+
+		
+
+		createGrid(16); // creates grid of x * x;
+		
+
+		</script>
+		
+		
+	</body>
